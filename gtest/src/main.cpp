@@ -1,6 +1,8 @@
-#include <iostream>
+//main.cpp
 
-int main ( int argc, char ** argv )
+int foo ( );
+
+int foo ()
 {
-    std::cout << "Hello world" << std::endl;
+	return 2;
 }

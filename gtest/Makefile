@@ -48,9 +48,11 @@ CONFIG_CLEAN_FILES =
 CONFIG_CLEAN_VPATH_FILES =
 am__installdirs = "$(DESTDIR)$(bindir)"
 PROGRAMS = $(bin_PROGRAMS)
-am_hw_OBJECTS = main.$(OBJEXT)
+am_hw_OBJECTS = hw-main.$(OBJEXT) hw-main_test.$(OBJEXT)
 hw_OBJECTS = $(am_hw_OBJECTS)
-hw_LDADD = $(LDADD)
+hw_DEPENDENCIES =
+hw_LINK = $(CXXLD) $(hw_CXXFLAGS) $(CXXFLAGS) $(AM_LDFLAGS) $(LDFLAGS) \
+	-o $@
 DEFAULT_INCLUDES = -I.
 depcomp = $(SHELL) $(top_srcdir)/depcomp
 am__depfiles_maybe = depfiles
@@ -158,7 +160,9 @@ target_alias =
 top_build_prefix = 
 top_builddir = .
 top_srcdir = .
-hw_SOURCES = src/main.cpp
+hw_SOURCES = src/main.cpp src/main_test.cpp
+hw_LDADD = -lgtest -lpthread
+hw_CXXFLAGS = -Igtest
 all: all-am
 
 .SUFFIXES:
@@ -236,7 +240,7 @@ clean-binPROGRAMS:
 	-test -z "$(bin_PROGRAMS)" || rm -f $(bin_PROGRAMS)
 hw$(EXEEXT): $(hw_OBJECTS) $(hw_DEPENDENCIES) 
 	@rm -f hw$(EXEEXT)
-	$(CXXLINK) $(hw_OBJECTS) $(hw_LDADD) $(LIBS)
+	$(hw_LINK) $(hw_OBJECTS) $(hw_LDADD) $(LIBS)
 
 mostlyclean-compile:
 	-rm -f *.$(OBJEXT)
@@ -244,7 +248,8 @@ mostlyclean-compile:
 distclean-compile:
 	-rm -f *.tab.c
 
-include ./$(DEPDIR)/main.Po
+include ./$(DEPDIR)/hw-main.Po
+include ./$(DEPDIR)/hw-main_test.Po
 
 .cpp.o:
 	$(CXXCOMPILE) -MT $@ -MD -MP -MF $(DEPDIR)/$*.Tpo -c -o $@ $<
@@ -260,19 +265,33 @@ include ./$(DEPDIR)/main.Po
 #	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) \
 #	$(CXXCOMPILE) -c -o $@ `$(CYGPATH_W) '$<'`
 
-main.o: src/main.cpp
-	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT main.o -MD -MP -MF $(DEPDIR)/main.Tpo -c -o main.o `test -f 'src/main.cpp' || echo '$(srcdir)/'`src/main.cpp
-	$(am__mv) $(DEPDIR)/main.Tpo $(DEPDIR)/main.Po
-#	source='src/main.cpp' object='main.o' libtool=no \
+hw-main.o: src/main.cpp
+	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(hw_CXXFLAGS) $(CXXFLAGS) -MT hw-main.o -MD -MP -MF $(DEPDIR)/hw-main.Tpo -c -o hw-main.o `test -f 'src/main.cpp' || echo '$(srcdir)/'`src/main.cpp
+	$(am__mv) $(DEPDIR)/hw-main.Tpo $(DEPDIR)/hw-main.Po
+#	source='src/main.cpp' object='hw-main.o' libtool=no \
 #	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) \
-#	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o main.o `test -f 'src/main.cpp' || echo '$(srcdir)/'`src/main.cpp
+#	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(hw_CXXFLAGS) $(CXXFLAGS) -c -o hw-main.o `test -f 'src/main.cpp' || echo '$(srcdir)/'`src/main.cpp
 
-main.obj: src/main.cpp
-	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT main.obj -MD -MP -MF $(DEPDIR)/main.Tpo -c -o main.obj `if test -f 'src/main.cpp'; then $(CYGPATH_W) 'src/main.cpp'; else $(CYGPATH_W) '$(srcdir)/src/main.cpp'; fi`
-	$(am__mv) $(DEPDIR)/main.Tpo $(DEPDIR)/main.Po
-#	source='src/main.cpp' object='main.obj' libtool=no \
+hw-main.obj: src/main.cpp
+	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(hw_CXXFLAGS) $(CXXFLAGS) -MT hw-main.obj -MD -MP -MF $(DEPDIR)/hw-main.Tpo -c -o hw-main.obj `if test -f 'src/main.cpp'; then $(CYGPATH_W) 'src/main.cpp'; else $(CYGPATH_W) '$(srcdir)/src/main.cpp'; fi`
+	$(am__mv) $(DEPDIR)/hw-main.Tpo $(DEPDIR)/hw-main.Po
+#	source='src/main.cpp' object='hw-main.obj' libtool=no \
 #	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) \
-#	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o main.obj `if test -f 'src/main.cpp'; then $(CYGPATH_W) 'src/main.cpp'; else $(CYGPATH_W) '$(srcdir)/src/main.cpp'; fi`
+#	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(hw_CXXFLAGS) $(CXXFLAGS) -c -o hw-main.obj `if test -f 'src/main.cpp'; then $(CYGPATH_W) 'src/main.cpp'; else $(CYGPATH_W) '$(srcdir)/src/main.cpp'; fi`
+
+hw-main_test.o: src/main_test.cpp
+	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(hw_CXXFLAGS) $(CXXFLAGS) -MT hw-main_test.o -MD -MP -MF $(DEPDIR)/hw-main_test.Tpo -c -o hw-main_test.o `test -f 'src/main_test.cpp' || echo '$(srcdir)/'`src/main_test.cpp
+	$(am__mv) $(DEPDIR)/hw-main_test.Tpo $(DEPDIR)/hw-main_test.Po
+#	source='src/main_test.cpp' object='hw-main_test.o' libtool=no \
+#	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) \
+#	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(hw_CXXFLAGS) $(CXXFLAGS) -c -o hw-main_test.o `test -f 'src/main_test.cpp' || echo '$(srcdir)/'`src/main_test.cpp
+
+hw-main_test.obj: src/main_test.cpp
+	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(hw_CXXFLAGS) $(CXXFLAGS) -MT hw-main_test.obj -MD -MP -MF $(DEPDIR)/hw-main_test.Tpo -c -o hw-main_test.obj `if test -f 'src/main_test.cpp'; then $(CYGPATH_W) 'src/main_test.cpp'; else $(CYGPATH_W) '$(srcdir)/src/main_test.cpp'; fi`
+	$(am__mv) $(DEPDIR)/hw-main_test.Tpo $(DEPDIR)/hw-main_test.Po
+#	source='src/main_test.cpp' object='hw-main_test.obj' libtool=no \
+#	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) \
+#	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(hw_CXXFLAGS) $(CXXFLAGS) -c -o hw-main_test.obj `if test -f 'src/main_test.cpp'; then $(CYGPATH_W) 'src/main_test.cpp'; else $(CYGPATH_W) '$(srcdir)/src/main_test.cpp'; fi`
 
 ID: $(HEADERS) $(SOURCES) $(LISP) $(TAGS_FILES)
 	list='$(SOURCES) $(HEADERS) $(LISP) $(TAGS_FILES)'; \
