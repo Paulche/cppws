@@ -38,7 +38,7 @@ DIST_COMMON = README $(am__configure_deps) $(srcdir)/Makefile.am \
 	$(srcdir)/Makefile.in $(top_srcdir)/configure AUTHORS COPYING \
 	ChangeLog INSTALL NEWS depcomp install-sh missing
 ACLOCAL_M4 = $(top_srcdir)/aclocal.m4
-am__aclocal_m4_deps = $(top_srcdir)/configure.in
+am__aclocal_m4_deps = $(top_srcdir)/configure.ac
 am__configure_deps = $(am__aclocal_m4_deps) $(CONFIGURE_DEPENDENCIES) \
 	$(ACLOCAL_M4)
 am__CONFIG_DISTCLEAN_FILES = config.status config.cache config.log \
@@ -48,8 +48,7 @@ CONFIG_CLEAN_FILES =
 CONFIG_CLEAN_VPATH_FILES =
 am__installdirs = "$(DESTDIR)$(bindir)"
 PROGRAMS = $(bin_PROGRAMS)
-am_hw_OBJECTS = main.$(OBJEXT) test.$(OBJEXT) Chunk.$(OBJEXT) \
-	ChunkFactory.$(OBJEXT) Finder.$(OBJEXT)
+am_hw_OBJECTS = main.$(OBJEXT)
 hw_OBJECTS = $(am_hw_OBJECTS)
 hw_LDADD = $(LDADD)
 DEFAULT_INCLUDES = -I.@am__isrc@
@@ -159,7 +158,7 @@ target_alias = @target_alias@
 top_build_prefix = @top_build_prefix@
 top_builddir = @top_builddir@
 top_srcdir = @top_srcdir@
-hw_SOURCES = src/main.cpp src/test.cpp src/Chunk.cpp src/ChunkFactory.cpp src/Finder.cpp
+hw_SOURCES = src/main.cpp
 all: all-am
 
 .SUFFIXES:
@@ -245,11 +244,7 @@ mostlyclean-compile:
 distclean-compile:
 	-rm -f *.tab.c
 
-@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/Chunk.Po@am__quote@
-@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/ChunkFactory.Po@am__quote@
-@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/Finder.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/main.Po@am__quote@
-@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/test.Po@am__quote@
 
 .cpp.o:
 @am__fastdepCXX_TRUE@	$(CXXCOMPILE) -MT $@ -MD -MP -MF $(DEPDIR)/$*.Tpo -c -o $@ $<
@@ -278,62 +273,6 @@ main.obj: src/main.cpp
 @AMDEP_TRUE@@am__fastdepCXX_FALSE@	source='src/main.cpp' object='main.obj' libtool=no @AMDEPBACKSLASH@
 @AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
 @am__fastdepCXX_FALSE@	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o main.obj `if test -f 'src/main.cpp'; then $(CYGPATH_W) 'src/main.cpp'; else $(CYGPATH_W) '$(srcdir)/src/main.cpp'; fi`
-
-test.o: src/test.cpp
-@am__fastdepCXX_TRUE@	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT test.o -MD -MP -MF $(DEPDIR)/test.Tpo -c -o test.o `test -f 'src/test.cpp' || echo '$(srcdir)/'`src/test.cpp
-@am__fastdepCXX_TRUE@	$(am__mv) $(DEPDIR)/test.Tpo $(DEPDIR)/test.Po
-@AMDEP_TRUE@@am__fastdepCXX_FALSE@	source='src/test.cpp' object='test.o' libtool=no @AMDEPBACKSLASH@
-@AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
-@am__fastdepCXX_FALSE@	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o test.o `test -f 'src/test.cpp' || echo '$(srcdir)/'`src/test.cpp
-
-test.obj: src/test.cpp
-@am__fastdepCXX_TRUE@	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT test.obj -MD -MP -MF $(DEPDIR)/test.Tpo -c -o test.obj `if test -f 'src/test.cpp'; then $(CYGPATH_W) 'src/test.cpp'; else $(CYGPATH_W) '$(srcdir)/src/test.cpp'; fi`
-@am__fastdepCXX_TRUE@	$(am__mv) $(DEPDIR)/test.Tpo $(DEPDIR)/test.Po
-@AMDEP_TRUE@@am__fastdepCXX_FALSE@	source='src/test.cpp' object='test.obj' libtool=no @AMDEPBACKSLASH@
-@AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
-@am__fastdepCXX_FALSE@	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o test.obj `if test -f 'src/test.cpp'; then $(CYGPATH_W) 'src/test.cpp'; else $(CYGPATH_W) '$(srcdir)/src/test.cpp'; fi`
-
-Chunk.o: src/Chunk.cpp
-@am__fastdepCXX_TRUE@	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT Chunk.o -MD -MP -MF $(DEPDIR)/Chunk.Tpo -c -o Chunk.o `test -f 'src/Chunk.cpp' || echo '$(srcdir)/'`src/Chunk.cpp
-@am__fastdepCXX_TRUE@	$(am__mv) $(DEPDIR)/Chunk.Tpo $(DEPDIR)/Chunk.Po
-@AMDEP_TRUE@@am__fastdepCXX_FALSE@	source='src/Chunk.cpp' object='Chunk.o' libtool=no @AMDEPBACKSLASH@
-@AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
-@am__fastdepCXX_FALSE@	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o Chunk.o `test -f 'src/Chunk.cpp' || echo '$(srcdir)/'`src/Chunk.cpp
-
-Chunk.obj: src/Chunk.cpp
-@am__fastdepCXX_TRUE@	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT Chunk.obj -MD -MP -MF $(DEPDIR)/Chunk.Tpo -c -o Chunk.obj `if test -f 'src/Chunk.cpp'; then $(CYGPATH_W) 'src/Chunk.cpp'; else $(CYGPATH_W) '$(srcdir)/src/Chunk.cpp'; fi`
-@am__fastdepCXX_TRUE@	$(am__mv) $(DEPDIR)/Chunk.Tpo $(DEPDIR)/Chunk.Po
-@AMDEP_TRUE@@am__fastdepCXX_FALSE@	source='src/Chunk.cpp' object='Chunk.obj' libtool=no @AMDEPBACKSLASH@
-@AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
-@am__fastdepCXX_FALSE@	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o Chunk.obj `if test -f 'src/Chunk.cpp'; then $(CYGPATH_W) 'src/Chunk.cpp'; else $(CYGPATH_W) '$(srcdir)/src/Chunk.cpp'; fi`
-
-ChunkFactory.o: src/ChunkFactory.cpp
-@am__fastdepCXX_TRUE@	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT ChunkFactory.o -MD -MP -MF $(DEPDIR)/ChunkFactory.Tpo -c -o ChunkFactory.o `test -f 'src/ChunkFactory.cpp' || echo '$(srcdir)/'`src/ChunkFactory.cpp
-@am__fastdepCXX_TRUE@	$(am__mv) $(DEPDIR)/ChunkFactory.Tpo $(DEPDIR)/ChunkFactory.Po
-@AMDEP_TRUE@@am__fastdepCXX_FALSE@	source='src/ChunkFactory.cpp' object='ChunkFactory.o' libtool=no @AMDEPBACKSLASH@
-@AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
-@am__fastdepCXX_FALSE@	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o ChunkFactory.o `test -f 'src/ChunkFactory.cpp' || echo '$(srcdir)/'`src/ChunkFactory.cpp
-
-ChunkFactory.obj: src/ChunkFactory.cpp
-@am__fastdepCXX_TRUE@	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT ChunkFactory.obj -MD -MP -MF $(DEPDIR)/ChunkFactory.Tpo -c -o ChunkFactory.obj `if test -f 'src/ChunkFactory.cpp'; then $(CYGPATH_W) 'src/ChunkFactory.cpp'; else $(CYGPATH_W) '$(srcdir)/src/ChunkFactory.cpp'; fi`
-@am__fastdepCXX_TRUE@	$(am__mv) $(DEPDIR)/ChunkFactory.Tpo $(DEPDIR)/ChunkFactory.Po
-@AMDEP_TRUE@@am__fastdepCXX_FALSE@	source='src/ChunkFactory.cpp' object='ChunkFactory.obj' libtool=no @AMDEPBACKSLASH@
-@AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
-@am__fastdepCXX_FALSE@	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o ChunkFactory.obj `if test -f 'src/ChunkFactory.cpp'; then $(CYGPATH_W) 'src/ChunkFactory.cpp'; else $(CYGPATH_W) '$(srcdir)/src/ChunkFactory.cpp'; fi`
-
-Finder.o: src/Finder.cpp
-@am__fastdepCXX_TRUE@	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT Finder.o -MD -MP -MF $(DEPDIR)/Finder.Tpo -c -o Finder.o `test -f 'src/Finder.cpp' || echo '$(srcdir)/'`src/Finder.cpp
-@am__fastdepCXX_TRUE@	$(am__mv) $(DEPDIR)/Finder.Tpo $(DEPDIR)/Finder.Po
-@AMDEP_TRUE@@am__fastdepCXX_FALSE@	source='src/Finder.cpp' object='Finder.o' libtool=no @AMDEPBACKSLASH@
-@AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
-@am__fastdepCXX_FALSE@	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o Finder.o `test -f 'src/Finder.cpp' || echo '$(srcdir)/'`src/Finder.cpp
-
-Finder.obj: src/Finder.cpp
-@am__fastdepCXX_TRUE@	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT Finder.obj -MD -MP -MF $(DEPDIR)/Finder.Tpo -c -o Finder.obj `if test -f 'src/Finder.cpp'; then $(CYGPATH_W) 'src/Finder.cpp'; else $(CYGPATH_W) '$(srcdir)/src/Finder.cpp'; fi`
-@am__fastdepCXX_TRUE@	$(am__mv) $(DEPDIR)/Finder.Tpo $(DEPDIR)/Finder.Po
-@AMDEP_TRUE@@am__fastdepCXX_FALSE@	source='src/Finder.cpp' object='Finder.obj' libtool=no @AMDEPBACKSLASH@
-@AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
-@am__fastdepCXX_FALSE@	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o Finder.obj `if test -f 'src/Finder.cpp'; then $(CYGPATH_W) 'src/Finder.cpp'; else $(CYGPATH_W) '$(srcdir)/src/Finder.cpp'; fi`
 
 ID: $(HEADERS) $(SOURCES) $(LISP) $(TAGS_FILES)
 	list='$(SOURCES) $(HEADERS) $(LISP) $(TAGS_FILES)'; \

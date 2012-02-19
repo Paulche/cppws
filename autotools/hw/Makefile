@@ -38,7 +38,7 @@ DIST_COMMON = README $(am__configure_deps) $(srcdir)/Makefile.am \
 	$(srcdir)/Makefile.in $(top_srcdir)/configure AUTHORS COPYING \
 	ChangeLog INSTALL NEWS depcomp install-sh missing
 ACLOCAL_M4 = $(top_srcdir)/aclocal.m4
-am__aclocal_m4_deps = $(top_srcdir)/configure.in
+am__aclocal_m4_deps = $(top_srcdir)/configure.ac
 am__configure_deps = $(am__aclocal_m4_deps) $(CONFIGURE_DEPENDENCIES) \
 	$(ACLOCAL_M4)
 am__CONFIG_DISTCLEAN_FILES = config.status config.cache config.log \
@@ -48,8 +48,7 @@ CONFIG_CLEAN_FILES =
 CONFIG_CLEAN_VPATH_FILES =
 am__installdirs = "$(DESTDIR)$(bindir)"
 PROGRAMS = $(bin_PROGRAMS)
-am_hw_OBJECTS = main.$(OBJEXT) test.$(OBJEXT) Chunk.$(OBJEXT) \
-	ChunkFactory.$(OBJEXT) Finder.$(OBJEXT)
+am_hw_OBJECTS = main.$(OBJEXT)
 hw_OBJECTS = $(am_hw_OBJECTS)
 hw_LDADD = $(LDADD)
 DEFAULT_INCLUDES = -I.
@@ -87,7 +86,7 @@ CXX = g++
 CXXDEPMODE = depmode=gcc3
 CXXFLAGS = -g -O2
 CYGPATH_W = echo
-DEFS = -DPACKAGE_NAME=\"\" -DPACKAGE_TARNAME=\"\" -DPACKAGE_VERSION=\"\" -DPACKAGE_STRING=\"\" -DPACKAGE_BUGREPORT=\"\" -DPACKAGE_URL=\"\" -DPACKAGE=\"hw\" -DVERSION=\"1.0\"
+DEFS = -DPACKAGE_NAME=\"hw\" -DPACKAGE_TARNAME=\"hw\" -DPACKAGE_VERSION=\"0.1\" -DPACKAGE_STRING=\"hw\ 0.1\" -DPACKAGE_BUGREPORT=\"paulche@yandex.ru\" -DPACKAGE_URL=\"\" -DPACKAGE=\"hw\" -DVERSION=\"0.1\"
 DEPDIR = .deps
 ECHO_C = 
 ECHO_N = -n
@@ -106,17 +105,17 @@ MAKEINFO = ${SHELL} /home/paul/cppws/autotools/hw/missing --run makeinfo
 MKDIR_P = /bin/mkdir -p
 OBJEXT = o
 PACKAGE = hw
-PACKAGE_BUGREPORT = 
-PACKAGE_NAME = 
-PACKAGE_STRING = 
-PACKAGE_TARNAME = 
+PACKAGE_BUGREPORT = paulche@yandex.ru
+PACKAGE_NAME = hw
+PACKAGE_STRING = hw 0.1
+PACKAGE_TARNAME = hw
 PACKAGE_URL = 
-PACKAGE_VERSION = 
+PACKAGE_VERSION = 0.1
 PATH_SEPARATOR = :
 SET_MAKE = 
 SHELL = /bin/bash
 STRIP = 
-VERSION = 1.0
+VERSION = 0.1
 abs_builddir = /home/paul/cppws/autotools/hw
 abs_srcdir = /home/paul/cppws/autotools/hw
 abs_top_builddir = /home/paul/cppws/autotools/hw
@@ -132,7 +131,7 @@ build_alias =
 builddir = .
 datadir = ${datarootdir}
 datarootdir = ${prefix}/share
-docdir = ${datarootdir}/doc/${PACKAGE}
+docdir = ${datarootdir}/doc/${PACKAGE_TARNAME}
 dvidir = ${docdir}
 exec_prefix = ${prefix}
 host_alias = 
@@ -159,7 +158,7 @@ target_alias =
 top_build_prefix = 
 top_builddir = .
 top_srcdir = .
-hw_SOURCES = src/main.cpp src/test.cpp src/Chunk.cpp src/ChunkFactory.cpp src/Finder.cpp
+hw_SOURCES = src/main.cpp
 all: all-am
 
 .SUFFIXES:
@@ -245,11 +244,7 @@ mostlyclean-compile:
 distclean-compile:
 	-rm -f *.tab.c
 
-include ./$(DEPDIR)/Chunk.Po
-include ./$(DEPDIR)/ChunkFactory.Po
-include ./$(DEPDIR)/Finder.Po
 include ./$(DEPDIR)/main.Po
-include ./$(DEPDIR)/test.Po
 
 .cpp.o:
 	$(CXXCOMPILE) -MT $@ -MD -MP -MF $(DEPDIR)/$*.Tpo -c -o $@ $<
@@ -278,62 +273,6 @@ main.obj: src/main.cpp
 #	source='src/main.cpp' object='main.obj' libtool=no \
 #	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) \
 #	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o main.obj `if test -f 'src/main.cpp'; then $(CYGPATH_W) 'src/main.cpp'; else $(CYGPATH_W) '$(srcdir)/src/main.cpp'; fi`
-
-test.o: src/test.cpp
-	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT test.o -MD -MP -MF $(DEPDIR)/test.Tpo -c -o test.o `test -f 'src/test.cpp' || echo '$(srcdir)/'`src/test.cpp
-	$(am__mv) $(DEPDIR)/test.Tpo $(DEPDIR)/test.Po
-#	source='src/test.cpp' object='test.o' libtool=no \
-#	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) \
-#	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o test.o `test -f 'src/test.cpp' || echo '$(srcdir)/'`src/test.cpp
-
-test.obj: src/test.cpp
-	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT test.obj -MD -MP -MF $(DEPDIR)/test.Tpo -c -o test.obj `if test -f 'src/test.cpp'; then $(CYGPATH_W) 'src/test.cpp'; else $(CYGPATH_W) '$(srcdir)/src/test.cpp'; fi`
-	$(am__mv) $(DEPDIR)/test.Tpo $(DEPDIR)/test.Po
-#	source='src/test.cpp' object='test.obj' libtool=no \
-#	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) \
-#	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o test.obj `if test -f 'src/test.cpp'; then $(CYGPATH_W) 'src/test.cpp'; else $(CYGPATH_W) '$(srcdir)/src/test.cpp'; fi`
-
-Chunk.o: src/Chunk.cpp
-	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT Chunk.o -MD -MP -MF $(DEPDIR)/Chunk.Tpo -c -o Chunk.o `test -f 'src/Chunk.cpp' || echo '$(srcdir)/'`src/Chunk.cpp
-	$(am__mv) $(DEPDIR)/Chunk.Tpo $(DEPDIR)/Chunk.Po
-#	source='src/Chunk.cpp' object='Chunk.o' libtool=no \
-#	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) \
-#	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o Chunk.o `test -f 'src/Chunk.cpp' || echo '$(srcdir)/'`src/Chunk.cpp
-
-Chunk.obj: src/Chunk.cpp
-	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT Chunk.obj -MD -MP -MF $(DEPDIR)/Chunk.Tpo -c -o Chunk.obj `if test -f 'src/Chunk.cpp'; then $(CYGPATH_W) 'src/Chunk.cpp'; else $(CYGPATH_W) '$(srcdir)/src/Chunk.cpp'; fi`
-	$(am__mv) $(DEPDIR)/Chunk.Tpo $(DEPDIR)/Chunk.Po
-#	source='src/Chunk.cpp' object='Chunk.obj' libtool=no \
-#	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) \
-#	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o Chunk.obj `if test -f 'src/Chunk.cpp'; then $(CYGPATH_W) 'src/Chunk.cpp'; else $(CYGPATH_W) '$(srcdir)/src/Chunk.cpp'; fi`
-
-ChunkFactory.o: src/ChunkFactory.cpp
-	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT ChunkFactory.o -MD -MP -MF $(DEPDIR)/ChunkFactory.Tpo -c -o ChunkFactory.o `test -f 'src/ChunkFactory.cpp' || echo '$(srcdir)/'`src/ChunkFactory.cpp
-	$(am__mv) $(DEPDIR)/ChunkFactory.Tpo $(DEPDIR)/ChunkFactory.Po
-#	source='src/ChunkFactory.cpp' object='ChunkFactory.o' libtool=no \
-#	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) \
-#	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o ChunkFactory.o `test -f 'src/ChunkFactory.cpp' || echo '$(srcdir)/'`src/ChunkFactory.cpp
-
-ChunkFactory.obj: src/ChunkFactory.cpp
-	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT ChunkFactory.obj -MD -MP -MF $(DEPDIR)/ChunkFactory.Tpo -c -o ChunkFactory.obj `if test -f 'src/ChunkFactory.cpp'; then $(CYGPATH_W) 'src/ChunkFactory.cpp'; else $(CYGPATH_W) '$(srcdir)/src/ChunkFactory.cpp'; fi`
-	$(am__mv) $(DEPDIR)/ChunkFactory.Tpo $(DEPDIR)/ChunkFactory.Po
-#	source='src/ChunkFactory.cpp' object='ChunkFactory.obj' libtool=no \
-#	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) \
-#	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o ChunkFactory.obj `if test -f 'src/ChunkFactory.cpp'; then $(CYGPATH_W) 'src/ChunkFactory.cpp'; else $(CYGPATH_W) '$(srcdir)/src/ChunkFactory.cpp'; fi`
-
-Finder.o: src/Finder.cpp
-	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT Finder.o -MD -MP -MF $(DEPDIR)/Finder.Tpo -c -o Finder.o `test -f 'src/Finder.cpp' || echo '$(srcdir)/'`src/Finder.cpp
-	$(am__mv) $(DEPDIR)/Finder.Tpo $(DEPDIR)/Finder.Po
-#	source='src/Finder.cpp' object='Finder.o' libtool=no \
-#	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) \
-#	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o Finder.o `test -f 'src/Finder.cpp' || echo '$(srcdir)/'`src/Finder.cpp
-
-Finder.obj: src/Finder.cpp
-	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT Finder.obj -MD -MP -MF $(DEPDIR)/Finder.Tpo -c -o Finder.obj `if test -f 'src/Finder.cpp'; then $(CYGPATH_W) 'src/Finder.cpp'; else $(CYGPATH_W) '$(srcdir)/src/Finder.cpp'; fi`
-	$(am__mv) $(DEPDIR)/Finder.Tpo $(DEPDIR)/Finder.Po
-#	source='src/Finder.cpp' object='Finder.obj' libtool=no \
-#	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) \
-#	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o Finder.obj `if test -f 'src/Finder.cpp'; then $(CYGPATH_W) 'src/Finder.cpp'; else $(CYGPATH_W) '$(srcdir)/src/Finder.cpp'; fi`
 
 ID: $(HEADERS) $(SOURCES) $(LISP) $(TAGS_FILES)
 	list='$(SOURCES) $(HEADERS) $(LISP) $(TAGS_FILES)'; \
