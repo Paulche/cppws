@@ -1,0 +1,7 @@
+task :default => ['boost_scoped_ptr_hw']
+
+file "boost_scoped_ptr_hw" => ['src/main.cpp'] do |task|
+	sh <<-BASH
+		g++ -o #{task.name} #{task.prerequisites.join ' '}
+	BASH
+end

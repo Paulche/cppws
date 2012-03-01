@@ -1,0 +1,17 @@
+require 'pp'
+
+file 'hw_mongo_insert' => ['out/main.o'] do |task|
+ 	sh <<-BASH
+		g++ -o #{task.name} #{task.prerequisites.join ' '} -lmongoclient -lpthread -lboost_thread -lboost_filesystem-mt -lboost_system-mt -lboost_thread-mt  -I/usr/include/mongo
+	BASH
+end
+
+file 'out/main.o' => [ 'src/main.cpp' ] do |task|
+	sh <<-BASH
+		g++ -c -I/usr/include/mongo -o #{task.name} #{task.prerequisites.join ' '}
+	BASH
+end
+
+
+
+
