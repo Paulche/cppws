@@ -25,6 +25,7 @@ class Server
   		void handle_accept(Session* new_session, const boost::system::error_code& error);
 
   		boost::asio::io_service& io_service_;
+  		
   		tcp::acceptor acceptor_;
 };
 

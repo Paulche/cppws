@@ -1,0 +1,7 @@
+task :default => ['em_client']
+
+file 'em_client' => ['src/main.cpp'] do |task|
+	sh <<-BASH
+		g++ -g -o #{task.name} #{task.prerequisites.join ' '}
+	BASH
+end
